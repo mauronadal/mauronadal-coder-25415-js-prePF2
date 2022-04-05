@@ -7,20 +7,35 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarProductoCarrito();
 });
 
-const producto = [
-  {"id": 1, "nombre": "Fuente Lnz XT 850-PM 850W", "imagen": "./img/img-pro-01.jpg", "extraInfo": "SALE", "precio": 6099},
-  {"id": 2, "nombre": "Silla Gamer Aerocool Admiral", "imagen": "./img/img-pro-02.jpg", "extraInfo": "NEW", "precio": 40999},
-  {"id": 3, "nombre": "Auricular Redragon H260", "imagen": "./img/img-pro-03.jpg", "extraInfo": "SALE", "precio": 2369},
-  {"id": 4, "nombre": "MotherBoard Gigabyte B450M DS3H", "imagen": "./img/img-pro-04.jpg", "extraInfo": "SALE", "precio": 16879},
-  {"id": 5, "nombre": "Monitor Gamer 24 Samsung Curvo C24F390FHL", "imagen": "./img/img-pro-05.jpg", "extraInfo": "SALE", "precio": 31299},
-  {"id": 6, "nombre": "Teclado y Mouse Logitech MK235 Inalámbrico Gris", "imagen": "./img/img-pro-06.jpg", "extraInfo": "NEW", "precio": 2249},
-  {"id": 7, "nombre": "Cámara Web Logitech C922", "imagen": "./img/img-pro-07.jpg", "extraInfo": "SALE", "precio": 10099},
-  {"id": 8, "nombre": "Ups Lyonn CTB-3000 VA", "imagen": "./img/img-pro-08.jpg", "extraInfo": "SALE", "precio": 54499}
+// const producto = [
+//   {"id": 1, "nombre": "Fuente Lnz XT 850-PM 850W", "imagen": "./img/img-pro-01.jpg", "extraInfo": "SALE", "precio": 6099},
+//   {"id": 2, "nombre": "Silla Gamer Aerocool Admiral", "imagen": "./img/img-pro-02.jpg", "extraInfo": "NEW", "precio": 40999},
+//   {"id": 3, "nombre": "Auricular Redragon H260", "imagen": "./img/img-pro-03.jpg", "extraInfo": "SALE", "precio": 2369},
+//   {"id": 4, "nombre": "MotherBoard Gigabyte B450M DS3H", "imagen": "./img/img-pro-04.jpg", "extraInfo": "SALE", "precio": 16879},
+//   {"id": 5, "nombre": "Monitor Gamer 24 Samsung Curvo C24F390FHL", "imagen": "./img/img-pro-05.jpg", "extraInfo": "SALE", "precio": 31299},
+//   {"id": 6, "nombre": "Teclado y Mouse Logitech MK235 Inalámbrico Gris", "imagen": "./img/img-pro-06.jpg", "extraInfo": "NEW", "precio": 2249},
+//   {"id": 7, "nombre": "Cámara Web Logitech C922", "imagen": "./img/img-pro-07.jpg", "extraInfo": "SALE", "precio": 10099},
+//   {"id": 8, "nombre": "Ups Lyonn CTB-3000 VA", "imagen": "./img/img-pro-08.jpg", "extraInfo": "SALE", "precio": 54499}
 
-]
+// ]
+
+function getProductosDb() {
+  const url = "../dbProductos.json";
+
+  return fetch(url)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 
 async function cargarProductos() {
-  const productos = producto;
+  const productos = await getProductosDb();
 
   let html = "";
   productos.forEach(producto => {
@@ -90,7 +105,7 @@ function agregarProductoCarrito(idProducto) {
 }
 
 async function cargarProductoCarrito() {
-  const productos = producto;
+  const productos = await getProductosDb();
 
 
   const localStorageItems = localStorage.getItem(productosCarrito);

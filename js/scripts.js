@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ]
 
 function getProductosDb() {
-  const url = "../dbProductos.json";
+  const url = "./dbProductos.json";
 
   return fetch(url)
     .then(response => {
